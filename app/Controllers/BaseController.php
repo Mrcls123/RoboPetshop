@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
  *
  * For security be sure to declare any new methods as protected or private.
  */
-abstract class BaseController extends Controller
+class BaseController extends Controller
 {
     /**
      * Instance of the main Request object.
@@ -27,6 +27,8 @@ abstract class BaseController extends Controller
      * @var CLIRequest|IncomingRequest
      */
     protected $request;
+    protected $defaultImage;
+
 
     /**
      * An array of helpers to be loaded automatically upon
@@ -35,13 +37,8 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['auth', 'number'];
 
-    /**
-     * Be sure to declare properties for any property fetch you initialized.
-     * The creation of dynamic property is deprecated in PHP 8.2.
-     */
-    // protected $session;
 
     /**
      * Constructor.
@@ -54,5 +51,7 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+        session();
+        $this->defaultImage =  'default.jpg';
     }
 }
